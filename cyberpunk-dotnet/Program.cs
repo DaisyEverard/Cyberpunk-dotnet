@@ -5,6 +5,14 @@ using cyberpunk_dotnet.Data.Mongo;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "all", policy => {
+        policy.WithOrigins("*")
+        .WithMethods("GET", "POST", "DELETE");
+        }
+    );
+});
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -22,6 +30,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseCors("all");
 
 app.UseHttpsRedirection();
 

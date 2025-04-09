@@ -41,7 +41,8 @@ namespace cyberpunk_dotnet.Controllers
             return Response; }
 
         [HttpDelete]
-        public async Task<EditCharacterResponse> Delete([FromBody] string id
+        [Route("{id}")]
+        public async Task<EditCharacterResponse> Delete(string id
             )
         {
             var Response = await _database.Delete(id);
