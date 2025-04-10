@@ -2,17 +2,23 @@
 
 using cyberpunk_dotnet.Data.Interfaces;
 using cyberpunk_dotnet.Data.Mongo;
+using Microsoft.AspNetCore.Http.Features;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: "all", policy => {
-        policy.WithOrigins("*")
-        .WithMethods("GET", "POST", "DELETE");
+        policy.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod();
         }
     );
 });
+
+builder.Services.Configure<FormOptions>(options => {
+    options.KeyLengthLimit = int.MaxValue;
+    });
+
+builder.Services.AddHttpLogging((o) => { });
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -31,6 +37,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 app.UseCors("all");
+app.UseHttpLogging();
 
 app.UseHttpsRedirection();
 

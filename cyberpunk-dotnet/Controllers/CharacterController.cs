@@ -35,10 +35,11 @@ namespace cyberpunk_dotnet.Controllers
 
         [HttpPost]
         [Route("new")]
-        public async Task<EditCharacterResponse> CreateNew([FromBody] NewCharacterRequest request
-            ) {
+        public async Task<EditCharacterResponse> CreateNew([FromBody] NewCharacterRequest request) 
+        {
             var Response = await _database.Create(request);
-            return Response; }
+            return Response;
+        }
 
         [HttpDelete]
         [Route("{id}")]
@@ -49,10 +50,9 @@ namespace cyberpunk_dotnet.Controllers
             return Response;
         }
 
-        [HttpPost]
+        [HttpPut]
         [Route("update")]
-        public async Task<EditCharacterResponse> Update([FromBody] Character updatedCharacter
-           )
+        public async Task<EditCharacterResponse> Update([FromBody] Character updatedCharacter)
         {
             var Response = await _database.Update(updatedCharacter);
             return Response;

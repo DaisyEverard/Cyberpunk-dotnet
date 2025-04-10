@@ -1,7 +1,6 @@
 ﻿using cyberpunk_dotnet.Data.Interfaces;
 using cyberpunk_dotnet.Data.Mongo.Models;
 using cyberpunk_dotnet.Models;
-using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace cyberpunk_dotnet.Data.Mongo
@@ -150,8 +149,7 @@ namespace cyberpunk_dotnet.Data.Mongo
 
             var namesAndIDs = new List<NameAndID>();
             foreach (var doc in documents)
-            {
-                Console.WriteLine(doc.ToJson());
+            { 
                 namesAndIDs.Add(new NameAndID { name = doc.name, id = doc.id });
             }
             return namesAndIDs;
